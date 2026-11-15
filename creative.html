@@ -1,0 +1,354 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create video ideas with KINGSTER AI STUDIO.">
+    <title>Creative Studio | KINGSTER AI STUDIO</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+
+    <style>
+        .creative-main {
+            min-height: 70vh;
+            padding: 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .creative-card {
+            width: 100%;
+            max-width: 700px;
+            padding: 30px;
+            background: #101d31;
+            border: 1px solid #1d7895;
+            border-radius: 18px;
+        }
+
+        .creative-card h1,
+        .creative-card h2 {
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .creative-card p {
+            color: #c5d4e2;
+            line-height: 1.6;
+        }
+
+        .creative-label {
+            display: block;
+            color: #39dafa;
+            margin: 22px 0 9px;
+            font-weight: bold;
+        }
+
+        .creative-select,
+        .creative-input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #28738e;
+            border-radius: 8px;
+            background: #071321;
+            color: white;
+            font-size: 15px;
+        }
+
+        .creative-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 22px;
+        }
+
+        .creative-button {
+            padding: 13px 18px;
+            border: none;
+            border-radius: 8px;
+            background: #16b9df;
+            color: #06121e;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .creative-button:hover {
+            background: #65e2fa;
+        }
+
+        .creative-copy {
+            background: #253b54;
+            color: white;
+        }
+
+        .creative-output {
+            margin-top: 25px;
+            padding: 20px;
+            min-height: 160px;
+            border: 1px dashed #2dbbdc;
+            border-radius: 10px;
+            background: #071321;
+            color: #49defb;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        .creative-status {
+            min-height: 24px;
+            margin-top: 12px;
+            color: #49defb;
+        }
+
+        @media (max-width: 600px) {
+            .creative-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo">AI STUDIO</span></div>
+
+        <nav class="navigation">
+            <a href="index.html">Home</a>
+            <a href="gaming.html">Gaming</a>
+            <a href="ai.html">AI</a>
+            <a href="creative.html">Creative</a>
+            <a href="tools.html">Tools</a>
+            <a href="about.html">About</a>
+        </nav>
+    </header>
+
+    <main class="creative-main">
+
+        <section class="creative-card">
+
+            <p>WELCOME TO THE CREATIVE LAB</p>
+
+            <h1>Video Idea Generator 🎬</h1>
+
+            <p>
+                Need inspiration for your next video?
+                Choose a video category and style to create
+                a video concept, hook, editing plan and caption.
+            </p>
+
+            <label class="creative-label" for="videoCategory">
+                1. Choose your video category:
+            </label>
+
+            <select class="creative-select" id="videoCategory">
+                <option value="Free Fire gaming">Free Fire</option>
+                <option value="Football">Football</option>
+                <option value="Funny moments">Funny moments</option>
+                <option value="Gaming highlights">Gaming highlights</option>
+                <option value="General content">Other content</option>
+            </select>
+
+            <label class="creative-label" for="videoStyle">
+                2. Choose your video style:
+            </label>
+
+            <select class="creative-select" id="videoStyle">
+                <option value="Fast and energetic">Fast and energetic</option>
+                <option value="Cinematic and dramatic">Cinematic</option>
+                <option value="Funny and entertaining">Funny</option>
+                <option value="Clean and professional">Professional</option>
+            </select>
+
+            <label class="creative-label" for="videoIdea">
+                3. Add your own idea (optional):
+            </label>
+
+            <input
+                class="creative-input"
+                type="text"
+                id="videoIdea"
+                maxlength="200"
+                placeholder="Example: A crazy final round clutch"
+            >
+
+            <div class="creative-buttons">
+
+                <button
+                    class="creative-button"
+                    id="generateIdea"
+                    type="button">
+                    Generate Video Idea
+                </button>
+
+                <button
+                    class="creative-button creative-copy"
+                    id="copyIdea"
+                    type="button">
+                    Copy Result
+                </button>
+
+            </div>
+
+            <h2 style="margin-top: 30px;">Your Video Plan</h2>
+
+            <div
+                class="creative-output"
+                id="videoOutput"
+                aria-live="polite">
+                Your video idea will appear here.
+            </div>
+
+            <p
+                class="creative-status"
+                id="creativeStatus"
+                aria-live="polite">
+            </p>
+
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 KINGSTER AI STUDIO. All rights reserved.</p>
+        <p>BUILD. PLAY. CREATE.</p>
+    </footer>
+
+    <script>
+        // CONNECT PAGE ELEMENTS
+
+        const videoCategory = document.getElementById("videoCategory");
+        const videoStyle = document.getElementById("videoStyle");
+        const videoIdea = document.getElementById("videoIdea");
+
+        const videoOutput = document.getElementById("videoOutput");
+        const creativeStatus = document.getElementById("creativeStatus");
+
+        const generateButton = document.getElementById("generateIdea");
+        const copyButton = document.getElementById("copyIdea");
+
+        let currentPlan = "";
+
+        // VIDEO IDEAS
+
+        const ideas = {
+            "Free Fire gaming": [
+                "Showcase your best gameplay moment",
+                "Create a clutch moment video",
+                "Make a headshot highlights compilation",
+                "Show a surprising in-game moment"
+            ],
+
+            "Football": [
+                "Create a collection of incredible goals",
+                "Showcase amazing football skills",
+                "Make a dramatic match highlights edit",
+                "Create a player skills compilation"
+            ],
+
+            "Funny moments": [
+                "Create a funny unexpected moments video",
+                "Show a collection of hilarious reactions",
+                "Make a gaming fails compilation",
+                "Create a funny challenge highlights video"
+            ],
+
+            "Gaming highlights": [
+                "Showcase your best gaming moments",
+                "Create an epic gameplay compilation",
+                "Make a highlights video with dramatic music",
+                "Show your biggest gaming achievement"
+            ],
+
+            "General content": [
+                "Create a short entertaining video",
+                "Make a quick tips and tricks video",
+                "Share an interesting story",
+                "Create a creative before-and-after video"
+            ]
+        };
+
+        // GENERATE VIDEO PLAN
+
+        function generateVideoIdea() {
+
+            const category = videoCategory.value;
+            const style = videoStyle.value;
+            const personalIdea = videoIdea.value.trim();
+
+            const choices = ideas[category];
+
+            const randomIndex = Math.floor(
+                Math.random() * choices.length
+            );
+
+            const chosenIdea = personalIdea || choices[randomIndex];
+
+            currentPlan =
+                "KINGSTER AI STUDIO - VIDEO PLAN\n\n" +
+                "CATEGORY: " + category + "\n" +
+                "STYLE: " + style + "\n\n" +
+                "VIDEO CONCEPT:\n" +
+                chosenIdea + "\n\n" +
+                "OPENING HOOK:\n" +
+                "Start with your most interesting moment to catch attention.\n\n" +
+                "EDITING PLAN:\n" +
+                "1. Start with a strong opening.\n" +
+                "2. Cut out unnecessary footage.\n" +
+                "3. Add suitable music and transitions.\n" +
+                "4. Finish with your best moment.\n\n" +
+                "CAPTION:\n" +
+                "Watch until the end! 🔥\n\n" +
+                "HASHTAGS:\n" +
+                "#Kingster #Gaming #VideoEdit #Highlights";
+
+            videoOutput.textContent = currentPlan;
+            creativeStatus.textContent = "Your video plan is ready!";
+        }
+
+        // COPY VIDEO PLAN
+
+        async function copyVideoPlan() {
+
+            if (!currentPlan) {
+                creativeStatus.textContent =
+                    "Generate a video plan first!";
+                return;
+            }
+
+            try {
+                await navigator.clipboard.writeText(currentPlan);
+
+                creativeStatus.textContent =
+                    "Video plan copied successfully!";
+
+            } catch (error) {
+
+                const temporaryInput = document.createElement("textarea");
+
+                temporaryInput.value = currentPlan;
+                document.body.appendChild(temporaryInput);
+
+                temporaryInput.select();
+
+                const copied = document.execCommand("copy");
+
+                temporaryInput.remove();
+
+                creativeStatus.textContent = copied
+                    ? "Video plan copied successfully!"
+                    : "Please copy the text manually.";
+            }
+        }
+
+        // BUTTON EVENTS
+
+        generateButton.addEventListener("click", generateVideoIdea);
+        copyButton.addEventListener("click", copyVideoPlan);
+
+    </script>
+
+</body>
+</html>

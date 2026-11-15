@@ -1,0 +1,312 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Build creative AI prompts with KINGSTER AI STUDIO.">
+    <title>AI Studio | KINGSTER AI STUDIO</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+
+    <style>
+        .ai-main {
+            padding: 60px 20px;
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .ai-card {
+            width: 100%;
+            max-width: 700px;
+            padding: 30px;
+            background: #101d31;
+            border: 1px solid #1d7895;
+            border-radius: 18px;
+        }
+
+        .ai-card h1,
+        .ai-card h2 {
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .ai-card p {
+            color: #c5d4e2;
+            line-height: 1.6;
+        }
+
+        .ai-label {
+            display: block;
+            color: #39dafa;
+            margin: 22px 0 9px;
+            font-weight: bold;
+        }
+
+        .ai-select,
+        .ai-input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #28738e;
+            border-radius: 8px;
+            background: #071321;
+            color: white;
+            font-size: 15px;
+        }
+
+        .ai-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 22px;
+        }
+
+        .ai-button {
+            padding: 13px 18px;
+            border: none;
+            border-radius: 8px;
+            background: #16b9df;
+            color: #06121e;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .ai-button:hover {
+            background: #65e2fa;
+        }
+
+        .ai-copy {
+            background: #253b54;
+            color: white;
+        }
+
+        .ai-output {
+            margin-top: 25px;
+            padding: 20px;
+            min-height: 150px;
+            border: 1px dashed #2dbbdc;
+            border-radius: 10px;
+            background: #071321;
+            color: #49defb;
+            line-height: 1.7;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        .ai-status {
+            color: #49defb;
+            min-height: 24px;
+            margin-top: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .ai-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo">AI STUDIO</span></div>
+
+        <nav class="navigation">
+            <a href="index.html">Home</a>
+            <a href="gaming.html">Gaming</a>
+            <a href="ai.html">AI</a>
+            <a href="creative.html">Creative</a>
+            <a href="tools.html">Tools</a>
+            <a href="about.html">About</a>
+        </nav>
+    </header>
+
+    <main class="ai-main">
+
+        <section class="ai-card">
+
+            <p>WELCOME TO THE AI LAB</p>
+
+            <h1>AI Prompt Builder 🤖</h1>
+
+            <p>
+                Turn your ideas into detailed prompts.
+                Choose a project, select a style and
+                describe what you want to create.
+            </p>
+
+            <label class="ai-label" for="projectType">
+                1. What are you creating?
+            </label>
+
+            <select class="ai-select" id="projectType">
+                <option value="Gaming logo">Gaming logo</option>
+                <option value="Gaming thumbnail">Gaming thumbnail</option>
+                <option value="Video editing concept">Video edit</option>
+                <option value="Video game concept">Video game</option>
+                <option value="Website design">Website design</option>
+                <option value="Creative graphic design">Graphic design</option>
+            </select>
+
+            <label class="ai-label" for="projectStyle">
+                2. Choose your style:
+            </label>
+
+            <select class="ai-select" id="projectStyle">
+                <option value="Futuristic and high-tech">Futuristic</option>
+                <option value="Dark and powerful">Dark</option>
+                <option value="Neon and colourful">Neon</option>
+                <option value="Realistic and professional">Realistic</option>
+                <option value="Clean and minimal">Minimal</option>
+            </select>
+
+            <label class="ai-label" for="projectIdea">
+                3. Describe your idea:
+            </label>
+
+            <input
+                class="ai-input"
+                type="text"
+                id="projectIdea"
+                maxlength="300"
+                placeholder="Example: A blue and black gaming logo called KINGSTER"
+            >
+
+            <div class="ai-buttons">
+
+                <button
+                    class="ai-button"
+                    id="buildPrompt"
+                    type="button">
+                    Build My Prompt
+                </button>
+
+                <button
+                    class="ai-button ai-copy"
+                    id="copyPrompt"
+                    type="button">
+                    Copy Prompt
+                </button>
+
+            </div>
+
+            <h2 style="margin-top: 30px;">Your AI Prompt</h2>
+
+            <div
+                class="ai-output"
+                id="promptOutput"
+                aria-live="polite">
+                Your completed prompt will appear here.
+            </div>
+
+            <p class="ai-status" id="aiStatus" aria-live="polite"></p>
+
+            <p>
+                This tool creates text prompts that you can copy
+                into a compatible AI service. It does not generate
+                images or videos by itself.
+            </p>
+
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 KINGSTER AI STUDIO. All rights reserved.</p>
+        <p>BUILD. PLAY. CREATE.</p>
+    </footer>
+
+    <script>
+        // CONNECT THE PAGE ELEMENTS
+
+        const projectType = document.getElementById("projectType");
+        const projectStyle = document.getElementById("projectStyle");
+        const projectIdea = document.getElementById("projectIdea");
+
+        const promptOutput = document.getElementById("promptOutput");
+        const aiStatus = document.getElementById("aiStatus");
+
+        const buildPrompt = document.getElementById("buildPrompt");
+        const copyPrompt = document.getElementById("copyPrompt");
+
+        let currentPrompt = "";
+
+        // CREATE THE PROMPT
+
+        function createPrompt() {
+
+            const type = projectType.value;
+            const style = projectStyle.value;
+            const idea = projectIdea.value.trim();
+
+            if (!idea) {
+                aiStatus.textContent =
+                    "Please describe your idea first.";
+
+                projectIdea.focus();
+                return;
+            }
+
+            currentPrompt =
+                "Act as a professional creative designer and expert.\n\n" +
+                "PROJECT: " + type + "\n\n" +
+                "MY IDEA: " + idea + "\n\n" +
+                "DESIGN STYLE: " + style + "\n\n" +
+                "INSTRUCTIONS:\n" +
+                "- Create an original and creative concept.\n" +
+                "- Follow the project idea carefully.\n" +
+                "- Make the result polished and professional.\n" +
+                "- Pay attention to detail and quality.\n" +
+                "- Avoid unnecessary elements.\n" +
+                "- Make the final result suitable for its intended purpose.";
+
+            promptOutput.textContent = currentPrompt;
+            aiStatus.textContent = "Your prompt has been created!";
+        }
+
+        // COPY THE PROMPT
+
+        async function copyGeneratedPrompt() {
+
+            if (!currentPrompt) {
+                aiStatus.textContent = "Build a prompt first!";
+                return;
+            }
+
+            try {
+                await navigator.clipboard.writeText(currentPrompt);
+
+                aiStatus.textContent =
+                    "Prompt copied successfully!";
+
+            } catch (error) {
+
+                const temporaryInput = document.createElement("textarea");
+
+                temporaryInput.value = currentPrompt;
+                document.body.appendChild(temporaryInput);
+
+                temporaryInput.select();
+
+                const copied = document.execCommand("copy");
+                temporaryInput.remove();
+
+                aiStatus.textContent = copied
+                    ? "Prompt copied successfully!"
+                    : "Please select and copy the prompt manually.";
+            }
+        }
+
+        // CONNECT BUTTONS
+
+        buildPrompt.addEventListener("click", createPrompt);
+        copyPrompt.addEventListener("click", copyGeneratedPrompt);
+
+    </script>
+
+</body>
+</html>

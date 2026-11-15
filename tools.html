@@ -1,0 +1,449 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Tools | KINGSTER AI STUDIO</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+
+    <style>
+        .tool-main {
+            min-height: 70vh;
+            padding: 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .tool-card {
+            width: 100%;
+            max-width: 650px;
+            padding: 30px;
+            border: 1px solid #1d7895;
+            border-radius: 18px;
+            background: #101d31;
+        }
+
+        .tool-card h1, .tool-card h2 {
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .tool-card p {
+            color: #c5d4e2;
+            line-height: 1.6;
+        }
+
+        .tool-label {
+            display: block;
+            color: #39dafa;
+            margin: 25px 0 10px;
+            font-weight: bold;
+        }
+
+        .tool-select {
+            width: 100%;
+            padding: 14px;
+            border-radius: 8px;
+            border: 1px solid #28738e;
+            background: #071321;
+            color: white;
+            font-size: 16px;
+        }
+
+        .tool-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 22px;
+        }
+
+        .tool-button {
+            padding: 12px 18px;
+            border: none;
+            border-radius: 8px;
+            background: #16b9df;
+            color: #06121e;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .tool-button:hover {
+            background: #65e2fa;
+        }
+
+        .copy-button {
+            background: #253b54;
+            color: white;
+        }
+
+        .save-button {
+            background: #167d64;
+            color: white;
+        }
+
+        .tool-result {
+            margin-top: 25px;
+            padding: 25px 15px;
+            border: 1px dashed #2dbbdc;
+            border-radius: 10px;
+            color: #49defb;
+            background: #071321;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            overflow-wrap: anywhere;
+        }
+
+        .tool-status {
+            min-height: 24px;
+            margin-top: 12px;
+            color: #49defb;
+            font-size: 14px;
+        }
+
+        .favourite-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        .favourite-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            background: #071321;
+            border: 1px solid #28738e;
+            border-radius: 9px;
+            padding: 14px;
+            margin-bottom: 12px;
+            color: white;
+        }
+
+        .favourite-name {
+            font-weight: bold;
+            color: #49defb;
+            overflow-wrap: anywhere;
+        }
+
+        .small-button {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            background: #253b54;
+            color: white;
+        }
+
+        .remove-button {
+            background: #963d49;
+        }
+
+        @media (max-width: 600px) {
+            .tool-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo">CTRLVERSEAI STUDIO</span></div>
+
+        <nav class="navigation">
+            <a href="index.html">Home</a>
+            <a href="gaming.html">Gaming</a>
+            <a href="ai.html">AI</a>
+            <a href="creative.html">Creative</a>
+            <a href="tools.html">Tools</a>
+            <a href="about.html">About</a>
+        </nav>
+    </header>
+
+    <main class="tool-main">
+
+        <!-- NAME GENERATOR -->
+        <section class="tool-card">
+            <p>THE KINGSTER GAMING TOOL</p>
+
+            <h1>Gaming Name Generator</h1>
+
+            <p>
+                Choose a style and generate your own
+                gaming name!
+            </p>
+
+            <label class="tool-label" for="styleChoice">
+                Choose your gamer style:
+            </label>
+
+            <select class="tool-select" id="styleChoice">
+                <option value="pro">Pro Gamer</option>
+                <option value="dark">Dark / Demon</option>
+                <option value="clean">Clean / Stylish</option>
+                <option value="funny">Funny</option>
+            </select>
+
+            <div class="tool-buttons">
+                <button class="tool-button" id="generateButton" type="button">
+                    Generate Name
+                </button>
+
+                <button class="tool-button copy-button" id="copyButton" type="button">
+                    Copy Name
+                </button>
+
+                <button class="tool-button save-button" id="saveButton" type="button">
+                    ♥ Save Favourite
+                </button>
+            </div>
+
+            <div class="tool-result" id="result" aria-live="polite">
+                YOUR NAME WILL APPEAR HERE
+            </div>
+
+            <p class="tool-status" id="status" aria-live="polite"></p>
+        </section>
+
+        <!-- FAVOURITES -->
+        <section class="tool-card">
+            <h2>♥ My Favourite Names</h2>
+
+            <p>
+                Your saved gaming names will appear here.
+            </p>
+
+            <ul class="favourite-list" id="favouritesList">
+            </ul>
+
+            <p class="tool-status" id="favouriteStatus"></p>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 KINGSTER AI STUDIO. All rights reserved.</p>
+        <p>BUILD. PLAY. CREATE.</p>
+    </footer>
+
+    <script>
+        // GAMING NAME COLLECTIONS
+
+        const nameStyles = {
+            pro: {
+                first: ["NOVA", "VORTEX", "SHADOW", "FROST", "BLAZE"],
+                second: ["STRIKE", "VIPER", "HUNTER", "LEGEND", "SCOPE"]
+            },
+
+            dark: {
+                first: ["DEMON", "REAPER", "VOID", "PHANTOM", "DARK"],
+                second: ["KING", "SOUL", "FURY", "NIGHT", "GHOST"]
+            },
+
+            clean: {
+                first: ["AERO", "ZEN", "ONYX", "LUX", "ORBIT"],
+                second: ["FLUX", "ZENITH", "ACE", "WAVE", "PRIME"]
+            },
+
+            funny: {
+                first: ["POTATO", "NOOB", "WIFI", "CHICKEN", "BANANA"],
+                second: ["BOSS", "NINJA", "MONSTER", "SNIPER", "LEGEND"]
+            }
+        };
+
+        // CONNECT HTML ELEMENTS
+
+        const result = document.getElementById("result");
+        const status = document.getElementById("status");
+        const styleChoice = document.getElementById("styleChoice");
+
+        const generateButton = document.getElementById("generateButton");
+        const copyButton = document.getElementById("copyButton");
+        const saveButton = document.getElementById("saveButton");
+
+        const favouritesList = document.getElementById("favouritesList");
+        const favouriteStatus = document.getElementById("favouriteStatus");
+
+        let currentName = "";
+
+        // GET RANDOM WORD
+
+        function randomItem(items) {
+            const index = Math.floor(Math.random() * items.length);
+            return items[index];
+        }
+
+        // GENERATE GAMING NAME
+
+        function generateName() {
+            const selectedStyle = styleChoice.value;
+            const words = nameStyles[selectedStyle];
+
+            const firstWord = randomItem(words.first);
+            const secondWord = randomItem(words.second);
+            const number = Math.floor(Math.random() * 99) + 1;
+
+            currentName = firstWord + "_" + secondWord + number;
+
+            result.textContent = currentName;
+            status.textContent = "Your new gaming name is ready!";
+        }
+
+        // COPY GAMING NAME
+
+        async function copyName() {
+            if (!currentName) {
+                status.textContent = "Generate a name first!";
+                return;
+            }
+
+            try {
+                await navigator.clipboard.writeText(currentName);
+                status.textContent = "Name copied successfully!";
+            } catch (error) {
+                const temporaryInput = document.createElement("textarea");
+                temporaryInput.value = currentName;
+
+                document.body.appendChild(temporaryInput);
+                temporaryInput.select();
+
+                const copied = document.execCommand("copy");
+                temporaryInput.remove();
+
+                status.textContent = copied
+                    ? "Name copied successfully!"
+                    : "Please select and copy the name manually.";
+            }
+        }
+
+        // GET SAVED FAVOURITES
+
+        function getFavourites() {
+            try {
+                const saved = JSON.parse(
+                    localStorage.getItem("kingsterFavoriteNames") || "[]"
+                );
+
+                return Array.isArray(saved)
+                    ? saved.filter(name => typeof name === "string")
+                    : [];
+
+            } catch (error) {
+                return [];
+            }
+        }
+
+        // SAVE FAVOURITES
+
+        function saveFavourites(names) {
+            try {
+                localStorage.setItem(
+                    "kingsterFavoriteNames",
+                    JSON.stringify(names)
+                );
+                return true;
+            } catch (error) {
+                favouriteStatus.textContent =
+                    "Could not save. Check your browser storage settings.";
+                return false;
+            }
+        }
+
+        // ADD NAME TO FAVOURITES
+
+        function saveFavorite() {
+            if (!currentName) {
+                status.textContent = "Generate a name first!";
+                return;
+            }
+
+            const favourites = getFavourites();
+
+            if (favourites.includes(currentName)) {
+                status.textContent = "This name is already saved!";
+                return;
+            }
+
+            favourites.push(currentName);
+
+            if (saveFavourites(favourites)) {
+                status.textContent = "♥ Name added to favourites!";
+                renderFavourites();
+            }
+        }
+
+        // REMOVE A FAVOURITE
+
+        function removeFavorite(name) {
+            const favourites = getFavourites();
+            const updatedFavourites = favourites.filter(item => item !== name);
+
+            if (saveFavourites(updatedFavourites)) {
+                favouriteStatus.textContent = "Favourite removed.";
+                renderFavourites();
+            }
+        }
+
+        // DISPLAY FAVOURITES
+
+        function renderFavourites() {
+            favouritesList.replaceChildren();
+
+            const favourites = getFavourites();
+
+            if (favourites.length === 0) {
+                const emptyMessage = document.createElement("li");
+                emptyMessage.textContent = "No favourite names saved yet.";
+                emptyMessage.style.color = "#c5d4e2";
+
+                favouritesList.appendChild(emptyMessage);
+                return;
+            }
+
+            favourites.forEach(function(name) {
+                const item = document.createElement("li");
+                item.className = "favourite-item";
+
+                const nameText = document.createElement("span");
+                nameText.className = "favourite-name";
+                nameText.textContent = name;
+
+                const removeButton = document.createElement("button");
+                removeButton.className = "small-button remove-button";
+                removeButton.type = "button";
+                removeButton.textContent = "Remove";
+
+                removeButton.addEventListener("click", function() {
+                    removeFavorite(name);
+                });
+
+                item.appendChild(nameText);
+                item.appendChild(removeButton);
+
+                favouritesList.appendChild(item);
+            });
+        }
+
+        // CONNECT BUTTONS
+
+        generateButton.addEventListener("click", generateName);
+        copyButton.addEventListener("click", copyName);
+        saveButton.addEventListener("click", saveFavorite);
+
+        // LOAD SAVED NAMES WHEN PAGE OPENS
+
+        renderFavourites();
+
+    </script>
+
+</body>
+</html>
