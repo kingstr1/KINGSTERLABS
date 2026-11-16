@@ -1,189 +1,171 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Explore gaming at KINGSTER AI STUDIO.">
-    <title>Gaming | KINGSTER AI STUDIO</title>
-
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
-
-    <style>
-        .gaming-page {
-            padding: 60px 20px;
-        }
-
-        .gaming-intro {
-            max-width: 850px;
-            margin: 0 auto 45px;
-            text-align: center;
-        }
-
-        .gaming-intro h1 {
-            color: white;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            margin: 12px 0;
-        }
-
-        .gaming-intro h1 span {
-            color: #39dafa;
-        }
-
-        .gaming-intro p,
-        .gaming-card p {
-            color: #c5d4e2;
-            line-height: 1.7;
-        }
-
-        .gaming-tag {
-            color: #39dafa !important;
-            font-weight: bold;
-            letter-spacing: 3px;
-        }
-
-        .gaming-grid {
-            max-width: 1000px;
-            margin: auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 20px;
-        }
-
-        .gaming-card {
-            padding: 25px;
-            border: 1px solid #1d7895;
-            border-radius: 15px;
-            background: #101d31;
-        }
-
-        .gaming-card h2 {
-            color: #39dafa;
-            margin: 12px 0;
-        }
-
-        .gaming-icon {
-            font-size: 38px;
-        }
-
-        .gaming-card .btn {
-            display: inline-block;
-            margin-top: 18px;
-        }
-
-        .gaming-callout {
-            max-width: 1000px;
-            margin: 40px auto 0;
-            padding: 35px;
-            text-align: center;
-            border: 1px solid #1d7895;
-            border-radius: 15px;
-            background: #101d31;
-        }
-
-        .gaming-callout h2 {
-            color: white;
-            margin-bottom: 12px;
-        }
-
-        .gaming-callout p {
-            color: #c5d4e2;
-            line-height: 1.7;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Create customised gaming videos with KINGSTER AI STUDIO.">
+  <title>Gaming Video Studio | KINGSTER AI STUDIO</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
-
 <body>
+  <header class="header">
+    <a class="logo" href="index.html">KINGSTER AI STUDIO</a>
+    <nav class="navigation" aria-label="Main navigation">
+      <a href="index.html">Home</a><a href="gaming.html">Gaming</a>
+      <a href="ai.html">AI</a><a href="creative.html">Creative</a>
+      <a href="tools.html">Tools</a><a href="about.html">About</a>
+    </nav>
+  </header>
 
-    <header class="header">
-        <div class="logo">AI STUDIO</span></div>
+  <main class="gaming-page">
+    <section class="gaming-intro">
+      <p class="gaming-tag">WELCOME TO THE GAMING ZONE</p>
+      <h1>LEVEL UP YOUR <span>GAMING</span></h1>
+      <p>Upload your clips, choose AI-style presets or take control with the manual editing tools.</p>
+    </section>
 
-        <nav class="navigation">
-            <a href="index.html">Home</a>
-            <a href="gaming.html">Gaming</a>
-            <a href="ai.html">AI</a>
-            <a href="creative.html">Creative</a>
-            <a href="tools.html">Tools</a>
-            <a href="about.html">About</a>
-        </nav>
-    </header>
+    <section class="gaming-grid">
+      <article class="gaming-card"><div class="gaming-icon">🔥</div><h2>Free Fire</h2><p>Create clutch compilations, highlight montages and gameplay projects.</p><a href="#ai-editor" class="btn">Edit Free Fire Clips</a></article>
+      <article class="gaming-card"><div class="gaming-icon">⚽</div><h2>Football & FIFA</h2><p>Bring your goals, skills and best moments together.</p><a href="#ai-editor" class="btn">Create a Football Edit</a></article>
+      <article class="gaming-card"><div class="gaming-icon">🎬</div><h2>Your Creative Style</h2><p>Choose your own settings and build an edit from scratch.</p><a href="#manual-editor" class="btn">Open Manual Studio</a></article>
+    </section>
 
-    <main class="gaming-page">
+    <section class="ai-editor" id="ai-editor">
+      <div class="editor-heading">
+        <p class="gaming-tag">YOUR CLIPS. YOUR RULES.</p>
+        <h2>KINGSTER <span>VIDEO STUDIO</span></h2>
+        <p>Upload clips and choose how your finished montage should look.</p>
+      </div>
 
-        <section class="gaming-intro">
-            <p class="gaming-tag">WELCOME TO THE GAMING ZONE</p>
-
-            <h1>LEVEL UP YOUR <span>GAMING</span></h1>
-
-            <p>
-                Explore gaming ideas, discover useful tools
-                and find inspiration for your next gaming project.
-                This is the gaming section of KINGSTER AI STUDIO.
-            </p>
+      <div class="editor-grid">
+        <section class="editor-panel">
+          <h3>1. Upload your clips</h3>
+          <label class="field-label" for="videoUpload">Gaming videos (select multiple)</label>
+          <input type="file" id="videoUpload" accept="video/*" multiple>
+          <p class="field-help">Start with a few short clips. Video processing happens in your browser.</p>
+          <div id="fileStatus" class="status" aria-live="polite">No videos selected yet.</div>
+          <ul id="clipList" class="clip-list"></ul>
+          <label class="field-label" for="musicUpload">Optional background music</label>
+          <input type="file" id="musicUpload" accept="audio/*">
+          <div id="musicStatus" class="field-help">No music selected.</div>
         </section>
 
-        <section class="gaming-grid">
-
-            <article class="gaming-card">
-                <div class="gaming-icon">🔥</div>
-                <h2>Free Fire</h2>
-                <p>
-                    Explore Free Fire content ideas,
-                    gameplay highlights and gaming projects.
-                </p>
-                <a href="creative.html" class="btn">
-                    Create Video Ideas
-                </a>
-            </article>
-
-            <article class="gaming-card">
-                <div class="gaming-icon">🎯</div>
-                <h2>Gamer Names</h2>
-                <p>
-                    Generate creative gaming usernames
-                    and save your favourite names.
-                </p>
-                <a href="tools.html" class="btn">
-                    Generate Names
-                </a>
-            </article>
-
-            <article class="gaming-card">
-                <div class="gaming-icon">💡</div>
-                <h2>Gaming Ideas</h2>
-                <p>
-                    Turn your gaming ideas into
-                    creative projects and videos.
-                </p>
-                <a href="ai.html" class="btn">
-                    Explore AI
-                </a>
-            </article>
-
+        <section class="editor-panel">
+          <h3>2. Quick edit settings</h3>
+          <label class="field-label" for="editDescription">Describe your edit (planning note)</label>
+          <textarea id="editDescription" rows="3" placeholder="Example: Make a fast Free Fire montage with blue text and energetic music."></textarea>
+          <div class="form-grid">
+            <div><label class="field-label" for="editStyle">Preset style</label><select id="editStyle"><option value="montage">Gaming montage</option><option value="headshot">Highlight style</option><option value="cinematic">Cinematic</option><option value="funny">Funny moments</option><option value="football">Football / FIFA</option><option value="custom">Custom</option></select></div>
+            <div><label class="field-label" for="videoFormat">Video format</label><select id="videoFormat"><option value="9:16">TikTok / Reels (9:16)</option><option value="16:9">YouTube (16:9)</option><option value="1:1">Square (1:1)</option></select></div>
+            <div><label class="field-label" for="videoLength">Maximum length</label><select id="videoLength"><option value="30">30 seconds</option><option value="60" selected>1 minute</option><option value="120">2 minutes</option><option value="all">Use all clips</option></select></div>
+            <div><label class="field-label" for="transitions">Transitions</label><select id="transitions"><option value="cut">Clean cuts</option><option value="fade">Fade between clips</option></select></div>
+          </div>
+          <label class="field-label" for="overlayText">Main text overlay</label>
+          <input type="text" id="overlayText" maxlength="60" placeholder="Example: KINGSTER ON TOP">
+          <fieldset class="effects-options"><legend>Quick effects</legend>
+            <label><input type="checkbox" value="slow" name="effects"> Slow-motion feel</label>
+            <label><input type="checkbox" value="glow" name="effects"> Colour pop</label>
+            <label><input type="checkbox" value="mono" name="effects"> Black & white</label>
+          </fieldset>
         </section>
+      </div>
 
-        <section class="gaming-callout">
-            <h2>READY TO CREATE SOMETHING?</h2>
+      <section class="manual-studio" id="manual-editor">
+        <div class="manual-heading">
+          <p class="gaming-tag">TAKE FULL CONTROL</p>
+          <h2>MANUAL <span>EDITING STUDIO</span></h2>
+          <p>20 hands-on tools. Change the settings, then generate your video.</p>
+        </div>
 
-            <p>
-                Try our gaming tools and start building
-                your next gaming project.
-            </p>
+        <div class="tool-groups">
+          <section class="tool-group">
+            <h3><span>01</span> Clip & timeline tools</h3>
+            <p class="field-help">Select a clip below to edit its timing. Use the arrows to change clip order.</p>
+            <div id="timeline" class="timeline-list"><p class="empty-timeline">Your uploaded clips will appear here.</p></div>
+            <div class="form-grid">
+              <div><label class="field-label" for="trimStart">Trim start (seconds)</label><input type="number" id="trimStart" min="0" step="0.1" value="0"></div>
+              <div><label class="field-label" for="trimEnd">Trim end (seconds)</label><input type="number" id="trimEnd" min="0" step="0.1" placeholder="Clip end"></div>
+            </div>
+            <div class="tool-button-row">
+              <button type="button" class="tool-button" id="applyTrim">Apply trim</button>
+              <button type="button" class="tool-button" id="splitClip">Split at midpoint</button>
+              <button type="button" class="tool-button" id="removeClip">Remove selected</button>
+            </div>
+          </section>
 
-            <br>
+          <section class="tool-group">
+            <h3><span>02</span> Frame & movement tools</h3>
+            <div class="form-grid">
+              <div><label class="field-label" for="cropMode">Crop / fit</label><select id="cropMode"><option value="cover">Fill frame (crop edges)</option><option value="contain">Fit whole video</option></select></div>
+              <div><label class="field-label" for="rotate">Rotate</label><select id="rotate"><option value="0">0°</option><option value="90">90°</option><option value="180">180°</option><option value="270">270°</option></select></div>
+              <div><label class="field-label" for="speed">Playback speed</label><select id="speed"><option value="0.5">0.5× slow</option><option value="0.75">0.75×</option><option value="1" selected>1× normal</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2× fast</option></select></div>
+              <div><label class="field-label" for="zoomStart">Starting zoom <output id="zoomStartValue">1.0×</output></label><input type="range" id="zoomStart" min="1" max="2" step="0.1" value="1"></div>
+              <div><label class="field-label" for="zoomEnd">Ending zoom <output id="zoomEndValue">1.0×</output></label><input type="range" id="zoomEnd" min="1" max="2" step="0.1" value="1"></div>
+              <div><label class="field-label" for="videoFormatManual">Canvas format</label><select id="videoFormatManual"><option value="match">Use quick setting</option><option value="9:16">Vertical 9:16</option><option value="16:9">Landscape 16:9</option><option value="1:1">Square 1:1</option></select></div>
+            </div>
+          </section>
 
-            <a href="tools.html" class="btn">
-                Explore Gaming Tools
-            </a>
-        </section>
+          <section class="tool-group">
+            <h3><span>03</span> Colour & visual tools</h3>
+            <div class="form-grid">
+              <div><label class="field-label" for="filter">Filter</label><select id="filter"><option value="none">Original</option><option value="cinema">Cinematic</option><option value="vivid">Vivid</option><option value="mono">Black & white</option><option value="warm">Warm</option><option value="cool">Cool</option></select></div>
+              <div><label class="field-label" for="brightness">Brightness <output id="brightnessValue">100%</output></label><input type="range" id="brightness" min="50" max="150" value="100"></div>
+              <div><label class="field-label" for="contrast">Contrast <output id="contrastValue">100%</output></label><input type="range" id="contrast" min="50" max="180" value="100"></div>
+              <div><label class="field-label" for="saturation">Saturation <output id="saturationValue">100%</output></label><input type="range" id="saturation" min="0" max="200" value="100"></div>
+              <div><label class="field-label" for="vignette">Vignette <output id="vignetteValue">0%</output></label><input type="range" id="vignette" min="0" max="80" value="0"></div>
+              <div><label class="field-label" for="blur">Soft blur <output id="blurValue">0px</output></label><input type="range" id="blur" min="0" max="5" value="0"></div>
+            </div>
+          </section>
 
-    </main>
+          <section class="tool-group">
+            <h3><span>04</span> Text, captions & stickers</h3>
+            <div class="form-grid">
+              <div><label class="field-label" for="captionText">Caption / subtitle text</label><input type="text" id="captionText" maxlength="100" placeholder="Type your caption"></div>
+              <div><label class="field-label" for="captionPosition">Caption position</label><select id="captionPosition"><option value="bottom">Bottom</option><option value="middle">Middle</option><option value="top">Top</option></select></div>
+              <div><label class="field-label" for="textColour">Text colour</label><select id="textColour"><option value="#ffffff">White</option><option value="#35ddff">Cyan</option><option value="#ffe45e">Yellow</option><option value="#ff6b9a">Pink</option></select></div>
+              <div><label class="field-label" for="sticker">Sticker overlay</label><select id="sticker"><option value="">No sticker</option><option value="🔥">🔥 Fire</option><option value="💀">💀 Skull</option><option value="⚡">⚡ Lightning</option><option value="🎯">🎯 Target</option><option value="👑">👑 Crown</option><option value="💯">💯 100</option></select></div>
+            </div>
+          </section>
 
-    <footer class="footer">
-        <p>© 2026 KINGSTER AI STUDIO. All rights reserved.</p>
-        <p>BUILD. PLAY. CREATE.</p>
-    </footer>
+          <section class="tool-group">
+            <h3><span>05</span> Audio & finishing tools</h3>
+            <div class="form-grid">
+              <div><label class="field-label" for="musicVolume">Music volume <output id="musicVolumeValue">80%</output></label><input type="range" id="musicVolume" min="0" max="100" value="80"></div>
+              <div><label class="field-label" for="soundFx">Sound effect</label><select id="soundFx"><option value="none">No added sound</option><option value="beep">Short electronic beep</option><option value="chime">Short chime</option></select></div>
+              <div><label class="field-label" for="exportQuality">Export quality</label><select id="exportQuality"><option value="2500000">Standard (2.5 Mbps)</option><option value="5000000" selected>High (5 Mbps)</option><option value="8000000">Very high (8 Mbps)</option></select></div>
+              <div><label class="field-label" for="fadeDuration">Transition duration</label><select id="fadeDuration"><option value="0.25">0.25 seconds</option><option value="0.5" selected>0.5 seconds</option><option value="1">1 second</option></select></div>
+            </div>
+            <p class="field-help">Clip audio is not mixed in this browser version; optional music is used as the soundtrack.</p>
+          </section>
+        </div>
 
+        <div class="thumbnail-tools">
+          <h3>Bonus: Thumbnail maker</h3>
+          <label class="field-label" for="thumbnailTitle">Thumbnail title</label>
+          <input type="text" id="thumbnailTitle" maxlength="50" placeholder="MY BEST GAMEPLAY">
+          <button type="button" class="tool-button" id="makeThumbnail">Create thumbnail from first clip</button>
+          <canvas id="thumbnailCanvas" width="1280" height="720" hidden></canvas>
+          <a id="thumbnailDownload" class="download-link" hidden>Download thumbnail PNG</a>
+        </div>
+      </section>
+
+      <div class="editor-actions">
+        <button type="button" id="generateBtn" class="btn">GENERATE MY VIDEO</button>
+        <button type="button" id="stopBtn" class="btn btn-secondary" disabled>Stop generation</button>
+        <p id="generationStatus" class="status" aria-live="polite">Choose your clips and settings to begin.</p>
+      </div>
+
+      <section class="preview-panel">
+        <h3>Preview & download</h3>
+        <video id="videoPreview" controls playsinline></video>
+        <a id="downloadLink" class="btn download-btn" hidden>Download finished video (WebM)</a>
+        <p class="field-help">This browser-based editor exports WebM. It applies the selected manual controls while rendering. It does not yet use AI to detect highlights, generate speech captions automatically or remove backgrounds.</p>
+      </section>
+    </section>
+
+    <section class="gaming-callout"><h2>YOUR GAMEPLAY. YOUR CREATION.</h2><p>More creative tools and smarter editing features are on the way.</p></section>
+  </main>
+  <footer class="footer"><p>© 2026 KINGSTER AI STUDIO. All rights reserved.</p><p>BUILD. PLAY. CREATE.</p></footer>
 </body>
 </html>
